@@ -1,6 +1,8 @@
 package com.example.blogsapp.data.repositories
 
+import com.example.blogsapp.data.models.BlogResponse
 import com.example.blogsapp.data.services.BlogApiService
+import com.example.blogsapp.data.toDomain
 import com.example.blogsapp.domain.interfaces.IBlogRepository
 import com.example.blogsapp.domain.models.BlogModel
 import javax.inject.Inject
@@ -20,16 +22,7 @@ class BlogRepository @Inject constructor(
                 if (blogs != null) {
                     for (blog in blogs) {
                         listOfBlogs.add(
-                            BlogModel(
-                                userId = blog.userId,
-                                title = blog.title,
-                                contentText = blog.contentText,
-                                photoUrl = blog.photoUrl,
-                                createdAt = blog.createdAt,
-                                id = blog.id,
-                                description = blog.description,
-                                category = blog.category
-                            )
+                            blog.toDomain()
                         )
                     }
                 }
