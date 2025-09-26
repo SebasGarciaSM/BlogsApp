@@ -1,0 +1,30 @@
+```plantuml
+@startuml
+package "Data Layer" {
+  interface BlogApiService
+  class Mappers
+}
+
+package "Domain Layer" {
+  class BlogModel
+  interface BlogRepository
+}
+
+package "UI Layer" {
+  class HomeViewModel
+  class Theme
+  class "Activity/Fragment" as View
+}
+
+package "Dependency Injection" {
+  class RepositoryModule
+}
+
+HomeViewModel --> BlogRepository
+BlogRepository --> BlogApiService
+BlogApiService --> BlogModel
+Mappers ..> BlogModel
+View --> HomeViewModel
+RepositoryModule ..> BlogRepository
+@enduml
+```
