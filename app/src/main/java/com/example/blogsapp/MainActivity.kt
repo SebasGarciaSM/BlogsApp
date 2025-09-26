@@ -17,30 +17,19 @@ import com.example.blogsapp.domain.interfaces.IBlogRepository
 import com.example.blogsapp.ui.theme.BlogsAppTheme
 import com.example.blogsapp.ui.viewmodels.HomeViewModel
 import com.example.blogsapp.ui.views.HomeView
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.slingacademy.com/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val apiService = retrofit.create(BlogApiService::class.java)
-
         setContent {
             BlogsAppTheme {
-                HomeView(
-                    viewModel = HomeViewModel(
-                        repository = BlogRepository(
-                            apiService
-                        )
-                    )
-                )
+                HomeView()
             }
         }
     }
